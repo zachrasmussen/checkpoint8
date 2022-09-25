@@ -25,7 +25,7 @@ namespace checkpoint8.Services
             return _keepRepo.GetAll();
         }
 
-        internal Keep GetById(int id, string userId)
+        internal Keep GetById(int id)
         {
             Keep keep = _keepRepo.GetById(id);
             if (keep == null)
@@ -37,7 +37,7 @@ namespace checkpoint8.Services
 
         internal Keep Update(Keep update, Account user)
         {
-            Keep original = GetById(update.Id, user.Id);
+            Keep original = GetById(update.Id);
             if (original.CreatorId != user.Id)
             {
                 throw new Exception($"you cannot update {original.Name} since you did not create it");
@@ -51,7 +51,7 @@ namespace checkpoint8.Services
 
         internal string Delete(int id, Account user)
         {
-            Keep original = GetById(id, user.Id);
+            Keep original = GetById(id);
             if (original.CreatorId != user.Id)
             {
                 throw new Exception($"{original.Name} is not yours to delete");
@@ -59,5 +59,13 @@ namespace checkpoint8.Services
             _keepRepo.Delete(id);
             return $"{original.Name} was deleted.";
         }
+
+
+
+        internal VaultKeepViewModel GetViewModelById(object keepId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

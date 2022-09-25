@@ -29,16 +29,6 @@ INSERT INTO keeps
 VALUES
 ('632de6501a80ce4093cc1c84', 'Dude Perfect', 'We make it on our first time, every time!', 'https://2018media.idtech.com/images/blog/featured/1624549672_dude-perfect.jpg?3bda24a9b9', 150, 2);
 
-CREATE TABLE vaultkeeps(
-  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  creatorId VARCHAR(255) NOT NULL,
-  vaultId INT NOT NULL,
-  keepId INT NOT NULL,
-
-  FOREIGN KEY (creatorId) REFERENCES accounts(id),
-  FOREIGN KEY (keepId) REFERENCES keeps(id),
-  FOREIGN KEY (vaultId) REFERENCES vaults(id)
-) default charset utf8 COMMENT '';
 
 CREATE TABLE vaults(
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
@@ -73,3 +63,59 @@ CREATE TABLE vaults(
   WHERE id = @Id;
 
   DELETE FROM keep WHERE id = @id;
+
+  CREATE TABLE IF NOT EXISTS vaults(
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  creatorId VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  isPrivate BOOLEAN NOT NULL DEFAULT FALSE,
+
+  FOREIGN KEY (creatorId) REFERENCES accounts(id)
+) default charset utf8 COMMENT '';
+
+  INSERT INTO vaults
+  (creatorId, name, description, isPrivate )
+  VALUES
+  ('632de23478f477ac2ae35864', 'Test Name', 'Test Description', True );
+  
+  SELECT
+  v.*,
+  a.*
+  FROM vaults v
+  JOIN accounts a ON v.creatorId = a.id
+  WHERE v.id = @id;
+
+  UPDATE vaults SET
+  name = @Name,
+  description = @Description,
+  isPrivate = @IsPrivate
+  WHERE id = @Id;
+
+  CREATE TABLE vaultKeeps(
+  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  creatorId VARCHAR(255) NOT NULL,
+  vaultId INT NOT NULL,
+  keepId INT NOT NULL,
+
+  FOREIGN KEY (creatorId) REFERENCES accounts(id),
+  FOREIGN KEY (keepId) REFERENCES keeps(id),
+  FOREIGN KEY (vaultId) REFERENCES vaults(id)
+) default charset utf8 COMMENT '';
+
+  INSERT INTO vaultKeeps
+  (creatorId, vaultId, keepId)
+  VALUES
+  ('63289a99b1a60e1497f3f2e9', 1, 1);
+
+  SELECT
+  vk.*,
+  k.*,
+  a.*
+  FROM vaultKeeps vk
+      JOIN keeps k ON vk.keepId = k.id
+      JOIN accounts a ON k.creatorId = a.id
+  WHERE vk.vaultId = @vaultId;
+
+  DELETE FROM vaultKeeps
+  WHERE id = @id

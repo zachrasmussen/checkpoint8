@@ -14,10 +14,12 @@ namespace checkpoint8.Controllers
     public class AccountController : ControllerBase
     {
         private readonly AccountService _accountService;
+        private readonly VaultsService _vService;
 
         public AccountController(AccountService accountService)
         {
             _accountService = accountService;
+            _vService = _vService;
         }
 
         [HttpGet]
@@ -33,6 +35,21 @@ namespace checkpoint8.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpGet("vaults")]
+        [Authorize]
+        public async Task<ActionResult<List<Vault>> Get()
+        {
+            try
+            {
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                return _vService.Get(user.Id);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+}
         }
     }
 

@@ -57,7 +57,7 @@ namespace checkpoint8.Controllers
             try
             {
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
-                Keep keep = _kService.GetById(id, user?.Id);
+                Keep keep = _kService.GetById(id);
                 return Ok(keep);
             }
             catch (Exception e)
@@ -74,7 +74,7 @@ namespace checkpoint8.Controllers
             {
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
                 keepData.CreatorId = user.Id;
-                Keep keep = _kService.Create(keepData, user);
+                Keep keep = _kService.Create(keepData);
                 keep.Creator = user;
                 return Ok(keep);
             }
