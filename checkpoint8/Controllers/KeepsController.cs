@@ -22,27 +22,14 @@ namespace checkpoint8.Controllers
             _kService = kService;
         }
 
-        // [HttpGet]
-        // public async Task<ActionResult<List<Keep>>> GetAll()
-        // {
-        //     try
-        //     {
-        //         Account user = await HttpContext.GetUserInfoAsync<Account>();
-        //         List<Keep> keeps = _kService.GetAll(user?.Id);
-        //         return Ok(keeps);
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
+
         [HttpGet]
         public async Task<ActionResult<List<Keep>>> GetAll()
         {
             try
             {
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
-                List<Keep> keeps = _kService.GetAll();
+                List<Keep> keeps = _kService.GetAll(user?.Id);
                 return Ok(keeps);
             }
             catch (Exception e)
@@ -57,7 +44,7 @@ namespace checkpoint8.Controllers
             try
             {
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
-                Keep keep = _kService.GetById(id);
+                Keep keep = _kService.GetById(id, user?.Id);
                 return Ok(keep);
             }
             catch (Exception e)

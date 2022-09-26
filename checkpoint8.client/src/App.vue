@@ -2,13 +2,11 @@
   <header>
     <Navbar />
   </header>
-  <main class="container-fluid">
+  <main>
     <router-view />
   </main>
   <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
-    </div>
+    <div class="bg-dark text-light text-center p-4"></div>
   </footer>
 </template>
 

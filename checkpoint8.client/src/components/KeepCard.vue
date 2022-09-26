@@ -1,33 +1,27 @@
 <template>
-  <section
-    class="p-4 justify-content-md-start justify-content-center"
-    @click="SetActive()"
-  >
-    <div class="col-10 col-md-3 keep-title-card">
-      <img
-        class="keep-img img-fluid rounded shadow selectable"
-        :src="keep.img"
-        alt=""
-      />
-      <div class="col-12 col-md-12 justify-content-center d-flex title-card">
-        <h3
-          class="
-            col-10 col-md-10
-            text-white text-start
-            p-2
-            item-name
-            text-center
-          "
-        >
-          {{ keep.name }}
-        </h3>
-      </div>
+  <div class="p-3 keep-title-card">
+    <img
+      @click="setActive"
+      class="keep-img img-fluid rounded shadow selectable"
+      :src="keep.img"
+      alt=""
+      data-bs-toggle="modal"
+      data-bs-target="#keep-details"
+    />
+    <div class="justify-content-center d-flex title-card">
+      <h3 class="text-white text-start p-2 item-name text-center">
+        {{ keep.name }}
+      </h3>
     </div>
-  </section>
-  <!-- <KeepModal /> -->
+  </div>
+  <KeepDetails />
 </template>
+
 <script>
+import { Modal } from 'bootstrap';
+import { logger } from '../utils/Logger';
 import { keepsService } from '../services/KeepsService';
+import KeepDetails from './KeepDetails.vue';
 
 export default {
   props: {
@@ -40,7 +34,7 @@ export default {
     return {
       async setActive() {
         try {
-          Modal.getOrCreateInstance(document.getElementById("keepModal")).toggle();
+          Modal.getOrCreateInstance(document.getElementById("keep-details")).toggle();
           await keepsService.getById(props.keep.id)
         } catch (error) {
           logger.error(error);
@@ -48,13 +42,11 @@ export default {
       }
     };
   },
-  //   components: { KeepModal }
+  components: { KeepDetails }
 };
 </script>
 <style>
 .keep-img {
-  height: 20em;
-  width: 100%;
   object-fit: cover;
   object-position: center;
 }
@@ -68,5 +60,6 @@ export default {
   background: rgba(218, 217, 217, 0.4);
   border: 0.5px solid #a3a3a3;
   backdrop-filter: blur(10px);
+  font-size: 1em;
 }
 </style>

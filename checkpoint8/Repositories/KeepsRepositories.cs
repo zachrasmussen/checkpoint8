@@ -55,12 +55,13 @@ namespace checkpoint8.Repositories
            FROM keeps k
            JOIN accounts a ON k.creatorId = a.id
            ";
-            List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+            // List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+            return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
             {
                 keep.Creator = profile;
                 return keep;
             }).ToList();
-            return keeps;
+            // return keeps;
         }
 
         internal void Delete(int id)
