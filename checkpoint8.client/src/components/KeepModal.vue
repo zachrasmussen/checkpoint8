@@ -4,7 +4,7 @@
     <div class="col-12">
       <div
         class="modal fade"
-        id="keepDetails"
+        id="keepModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -15,20 +15,16 @@
             <div class="container-fluid">
               <div class="row">
                 <div class="col-12 col-md-5 p-0 m-0">
-                  <img
-                    src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=999&q=80"
-                    alt=""
-                    class="img-fluid"
-                  />
+                  <img class="img-fluid" :src="keep.img" alt="" />
                 </div>
                 <div class="col-10 col-md-7">
                   <div class="pt-3 justify-content-start d-flex">
                     <p class="title-font pb-2 m-0 p-0">
-                      <b>Bacon Hamburger</b>
+                      <b>{{ keep.name }}</b>
                     </p>
                   </div>
                   <div class="justify-content-start d-flex">
-                    <p class="desc-font">A classic for BBQ parties</p>
+                    <p class="desc-font">{{ keep.description }}</p>
                   </div>
                   <div class="justify-content-evenly d-flex m-2 mt-2 mb-3 pb-2">
                     <div class="col-10 col-md-6 order-2 order-md-1 shadow mx-2">
@@ -116,42 +112,15 @@
 </template>
 
 <script>
+import { AppState } from '../AppState';
 export default {
   setup() {
-    return {};
+    return {
+      keep: computed(() => AppState.activeKeep)
+    };
   },
 };
 </script>
 
 <style scoped>
-img {
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-.recipe-item div {
-  position: relative;
-}
-.title-font {
-  font-size: 25px;
-  color: black;
-}
-.desc-font {
-  font-size: 20px;
-  color: black;
-}
-.item-name {
-  position: absolute;
-  bottom: 0;
-  background: rgba(218, 217, 217, 0.4);
-  border: 0.5px solid #a3a3a3;
-  backdrop-filter: blur(10px);
-}
-.steps {
-  background-color: #0096fa;
-}
-.scrolling {
-  height: 50vh;
-  overflow-y: auto;
-}
 </style>

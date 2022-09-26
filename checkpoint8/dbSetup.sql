@@ -62,7 +62,7 @@ CREATE TABLE vaults(
   kept = @Kept
   WHERE id = @Id;
 
-  DELETE FROM keep WHERE id = @id;
+  DELETE FROM keeps WHERE id = @id;
 
   CREATE TABLE IF NOT EXISTS vaults(
   id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,

@@ -1,20 +1,16 @@
 <template>
-  <div
-    class="
-      home
-      flex-grow-1
-      d-flex
-      flex-column
-      align-items-center
-      justify-content-center
-    "
-  ></div>
+  <section class="row">
+    <div class="col-12" v-for="k in keeps" :key="k.id">
+      <KeepCard :keep="k" />
+    </div>
+  </section>
 </template>
 
 <script>
-import { onMounted } from '@vue/runtime-core';
+import { computed, onMounted } from '@vue/runtime-core';
 import { logger } from '../utils/Logger';
 import { keepsService } from '../services/KeepsService';
+import { AppState } from '../AppState';
 export default {
   name: 'Home',
   setup() {
@@ -28,9 +24,21 @@ export default {
     onMounted(() => {
       getKeeps();
     });
+    return {
+      keeps: computed(() => AppState.keeps)
+    }
   }
 }
 </script>
 
 <style scoped lang="scss">
+// .masonry {
+//   columns: 200px;
+//   column-gap: 1em;
+
+//   div {
+//     display: block;
+//     margin-bottom: 1em;
+//   }
+// }
 </style>

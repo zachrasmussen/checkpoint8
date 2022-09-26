@@ -66,7 +66,7 @@ namespace checkpoint8.Repositories
         internal void Delete(int id)
         {
             string sql = @"
-            DELETE FROM keep WHERE id = @id;
+            DELETE FROM keeps WHERE id = @id;
             ";
             _db.Execute(sql, new { id });
         }

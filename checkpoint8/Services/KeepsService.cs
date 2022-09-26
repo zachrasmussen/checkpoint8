@@ -51,7 +51,7 @@ namespace checkpoint8.Services
 
         internal string Delete(int id, Account user)
         {
-            Keep original = GetById(id);
+            Keep original = GetById(id, user.Id);
             if (original.CreatorId != user.Id)
             {
                 throw new Exception($"{original.Name} is not yours to delete");
