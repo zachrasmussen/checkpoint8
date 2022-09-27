@@ -11,7 +11,7 @@
         <div class="col-8 justify-content-start">
           <h1>{{ account.name }}</h1>
           <h5>Vaults:</h5>
-          <h5>Keeps</h5>
+          <h5>Keeps:</h5>
         </div>
       </div>
     </div>
@@ -21,7 +21,9 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span class="add">⊕</span>
+          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
+            ⊕
+          </span>
         </h4>
       </div>
       <div></div>
@@ -32,16 +34,15 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Keeps
-          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form"
-            >⊕</span
-          >
-          <KeepForm />
+          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form">
+            ⊕
+          </span>
         </h4>
       </div>
     </div>
-
     <!--  -->
   </div>
+  <KeepForm />
 </template>
 
 <script>

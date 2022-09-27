@@ -32,8 +32,12 @@
                     "
                   >
                     <p class="pb-2 m-0 p-0">
-                      <i class="mdi mdi-eye icon mx-2"></i>
-                      <i class="mdi mdi-pin icon mx-2"></i>
+                      <i class="mdi mdi-eye icon mx-2"
+                        ><span>{{ keep?.views }}</span></i
+                      >
+                      <i class="mdi mdi-pin icon mx-2"
+                        ><span class="ms-2">{{ keep?.kept }}</span></i
+                      >
                     </p>
                   </div>
 
@@ -50,7 +54,7 @@
                   >
                     <div
                       class="
-                        col-12 col-md-6
+                        col-12 col-md-10
                         order-2 order-md-1
                         mx-2
                         body-height
@@ -67,13 +71,17 @@
                     </div>
                   </div>
                   <div class="modal-footer justify-content-between d-flex">
-                    <button class="btn-color rounded">
+                    <button class="btn-color rounded" @click="addToVault">
                       ADD TO VAULT
                       <i
                         class="mdi mdi-arrow-down-drop-circle-outline ms-2"
                       ></i>
                     </button>
-                    <i class="mdi mdi-close-circle-outline d-icon"></i>
+                    <i
+                      v-if="isCreator"
+                      @click="deleteKeep"
+                      class="mdi mdi-close-circle-outline d-icon"
+                    ></i>
                   </div>
                 </div>
               </div>
@@ -88,10 +96,31 @@
 <script>
 import { computed } from '@vue/runtime-core';
 import { AppState } from '../AppState';
+import { keepsService } from '../services/KeepsService';
+import Pop from '../utils/Pop';
+import { router } from '../router';
+import { logger } from '../utils/Logger';
+
 export default {
   setup() {
     return {
-      keep: computed(() => AppState.activeKeep)
+      async addToKeep() {
+
+      },
+
+      keep: computed(() => AppState.activeKeep),
+      isCreator: computed(() => AppState.activeKeep?.account == AppState.account?.id),
+      async deleteKeep() {
+        try {
+          await keepsService.deleteKeep(route.params.id)
+          Pop.toast('Keep Deleted', 'success')
+          router.push({ name: 'Home' })
+        } catch (error) {
+          Pop.error(error.message);
+          logger.log(error);
+        }
+      }
+
     };
   },
 };

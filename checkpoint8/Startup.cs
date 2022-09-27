@@ -35,8 +35,10 @@ namespace checkpoint8
 
             services.AddScoped<AccountsRepository>();
             services.AddTransient<KeepsRepository>();
+            services.AddTransient<VaultsRepository>();
             services.AddScoped<AccountService>();
             services.AddTransient<KeepsService>();
+            services.AddTransient<VaultsService>();
         }
 
         private void ConfigureCors(IServiceCollection services)

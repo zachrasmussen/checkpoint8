@@ -39,17 +39,17 @@ namespace checkpoint8.Controllers
         //         [HttpGet("vaults")]
         //         [Authorize]
         //         public async Task<ActionResult<List<Vault>> Get()
-        //         {
-        //             try
-        //             {
-        //                 Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        //                 return _vService.Get(user.Id);
-        //             }
-        //             catch (Exception e)
-        //             {
-        //                 return BadRequest(e.Message);
+        //                 {
+        //                     try
+        //                     {
+        //                         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        //                         return _vService.Get(user.Id);
+        //                     }
+        //                     catch (Exception e)
+        //                     {
+        //                         return BadRequest(e.Message);
         // }
-        //         }
+        //                 }
     }
 
 

@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS keeps(
 INSERT INTO keeps
 (creatorId, name, description, img, views, kept)
 VALUES
-('63289a99b1a60e1497f3f2e9', 'MrBeast', 'This is totally awesome', 'https://helios-i.mashable.com/imagery/articles/00AxnPvg6PSo6ToUtjc7YVr/hero-image.fill.size_1200x1200.v1650398912.png', 100, 1 );
+('63289a99b1a60e1497f3f2e9', 'MrBeast', 'This is totally awesome', 'https://helios-i.mashable.com/imagery/articles/00AxnPvg6PSo6ToUtjc7YVr/hero-image.fill.size_1200x1200.v1650398912.png', 100, 5 );
 
 INSERT INTO keeps
 (creatorId, name, description, img, views, kept)
@@ -30,15 +30,7 @@ VALUES
 ('632de6501a80ce4093cc1c84', 'Dude Perfect', 'We make it on our first time, every time!', 'https://2018media.idtech.com/images/blog/featured/1624549672_dude-perfect.jpg?3bda24a9b9', 150, 2);
 
 
-CREATE TABLE vaults(
-  id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  creatorId VARCHAR(255) NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  isPrivate BOOLEAN,
 
-  FOREIGN KEY (creatorId) REFERENCES accounts(id)
-) default charset utf8 COMMENT '';
 
   SELECT
   k.*,
@@ -106,7 +98,7 @@ CREATE TABLE vaults(
   INSERT INTO vaultKeeps
   (creatorId, vaultId, keepId)
   VALUES
-  ('63289a99b1a60e1497f3f2e9', 1, 1);
+  ('632de6501a80ce4093cc1c84', 1, 1);
 
   SELECT
   vk.*,

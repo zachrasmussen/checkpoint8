@@ -3,7 +3,7 @@
     <div class="col-12">
       <div
         class="modal fade"
-        id="keep-form"
+        id="vault-form"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -51,7 +51,7 @@
                 <button
                   class="btn-color rounded"
                   data-bs-dismiss="modal"
-                  @click="createKeep"
+                  @click="createVault"
                 >
                   Create
                 </button>
@@ -71,7 +71,7 @@ import { keepsService } from '../services/KeepsService'
 import { logger } from '../utils/Logger'
 import Pop from '../utils/Pop'
 export default {
-  props: { keepData: { type: Object, required: false, default: {} } },
+  props: { vaultData: { type: Object, required: false, default: {} } },
   setup(props) {
 
     const editable = ref({})

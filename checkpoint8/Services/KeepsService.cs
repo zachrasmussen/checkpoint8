@@ -17,6 +17,7 @@ namespace checkpoint8.Services
 
         internal Keep Create(Keep keepData)
         {
+
             return _keepRepo.Create(keepData);
         }
 
@@ -34,7 +35,8 @@ namespace checkpoint8.Services
             {
                 throw new Exception("There is no keep at this id");
             }
-
+            keep.Views++;
+            _keepRepo.Update(keep);
             return keep;
         }
 
