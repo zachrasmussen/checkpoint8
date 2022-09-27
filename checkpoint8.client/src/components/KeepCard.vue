@@ -24,6 +24,7 @@ import { keepsService } from '../services/KeepsService';
 import KeepDetails from './KeepDetails.vue';
 
 export default {
+
   props: {
     keep: {
       type: Object,
@@ -32,6 +33,7 @@ export default {
   },
   setup(props) {
     return {
+
       async setActive() {
         try {
           Modal.getOrCreateInstance(document.getElementById("keep-details")).toggle();

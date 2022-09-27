@@ -21,9 +21,7 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form"
-            >⊕</span
-          >
+          <span class="add">⊕</span>
         </h4>
       </div>
       <div></div>
@@ -37,10 +35,11 @@
           <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form"
             >⊕</span
           >
+          <KeepForm />
         </h4>
-        <KeepForm />
       </div>
     </div>
+
     <!--  -->
   </div>
 </template>
@@ -57,6 +56,7 @@ export default {
       required: true
     }
   },
+
   setup() {
     return {
       account: computed(() => AppState.account)
