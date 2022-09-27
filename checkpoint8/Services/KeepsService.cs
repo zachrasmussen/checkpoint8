@@ -15,7 +15,7 @@ namespace checkpoint8.Services
         }
 
 
-        internal Keep Create(Keep keepData, Account user)
+        internal Keep Create(Keep keepData)
         {
             return _keepRepo.Create(keepData);
         }

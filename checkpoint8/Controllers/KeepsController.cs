@@ -61,7 +61,7 @@ namespace checkpoint8.Controllers
             {
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
                 keepData.CreatorId = user.Id;
-                Keep keep = _kService.Create(keepData, user);
+                Keep keep = _kService.Create(keepData);
                 keep.Creator = user;
                 return Ok(keep);
             }
