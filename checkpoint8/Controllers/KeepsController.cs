@@ -61,7 +61,7 @@ namespace checkpoint8.Controllers
             {
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
                 keepData.CreatorId = user.Id;
-                Keep keep = _kService.Create(keepData);
+                Keep keep = _kService.Create(keepData, user);
                 keep.Creator = user;
                 return Ok(keep);
             }
@@ -70,6 +70,8 @@ namespace checkpoint8.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+
 
         [HttpPut("{id}")]
         [Authorize]

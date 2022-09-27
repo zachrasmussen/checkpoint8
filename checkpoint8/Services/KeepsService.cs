@@ -15,16 +15,16 @@ namespace checkpoint8.Services
         }
 
 
-        internal Keep Create(Keep keepData)
+        internal Keep Create(Keep keepData, Account user)
         {
             return _keepRepo.Create(keepData);
         }
 
         internal List<Keep> GetAll(string id)
         {
-            List<Keep> keeps = _keepRepo.GetAll();
-            return keeps;
-            // return _keepRepo.GetAll();
+            // List<Keep> keeps = _keepRepo.GetAll();
+            // return keeps;
+            return _keepRepo.GetAll();
         }
 
         internal Keep GetById(int id, string userId)
