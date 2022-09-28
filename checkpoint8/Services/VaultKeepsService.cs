@@ -39,6 +39,15 @@ namespace checkpoint8.Services
             return _vkRepo.Create(vaultKeepData);
         }
 
+        internal System.Collections.Generic.List<VaultKeepViewModel> GetKeepsByVaultId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+
+
 
 
         // internal ActionResult<string> Delete(int id, Account user)
