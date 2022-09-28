@@ -1,4 +1,5 @@
 using System.Data;
+using System.Linq;
 using checkpoint8.Models;
 using Dapper;
 
@@ -27,25 +28,15 @@ namespace checkpoint8.Repositories
             return vaultKeepData;
         }
 
-        internal List<VaultKeep> Get(int vaultId)
+        internal VaultKeep GetById(int id)
         {
             string sql = @"
-            SELECT
-            vk.*,
-            k.*,
-            a.*
-            FROM vaultKeeps vk
-                JOIN keeps k ON vk.keepId = k.id
-                JOIN accounts a ON k.creatorId = a.id
-            WHERE vk.vaultId = @vaultId;
+            SELECT * 
+            FROM vaultKeeps 
+            WHERE id = @id;
             ";
-            List<VaultKeep> keep = _db.Query<VaultKeep, VaultKeep, Account, VaultKeep>(sql, (vk, k, a) =>
-            {
-                k.Creator = a;
-                k.VaultKeepId = vk.Id;
-                return k;
-            }, new { vaultId }).ToList();
-            return keeps;
+            VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, new { id }).FirstOrDefault();
+            return vaultKeep;
         }
 
 

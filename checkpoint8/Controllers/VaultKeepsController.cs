@@ -35,21 +35,24 @@ namespace checkpoint8.Controllers
             }
         }
 
-        [HttpGet]
-        [Authorize]
-
-        public Task<ActionResult<VaultKeep>> GetById([FromBody] VaultKeep vaultKeepData)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<VaultKeep>> GetById(int id)
         {
             try
             {
-
+                Account user = await HttpContext.GetUserInfoAsync<Account>();
+                VaultKeep vaultKeepData = _vkService.GetById(id, user?.Id);
+                return Ok(vaultKeepData);
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
-
-                throw;
+                return BadRequest(e.Message);
             }
         }
+
+
+
+
 
         // [HttpDelete("{id")]
         // [Authorize]

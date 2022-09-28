@@ -1,3 +1,4 @@
+using System;
 using checkpoint8.Models;
 using checkpoint8.Repositories;
 
@@ -19,9 +20,14 @@ namespace checkpoint8.Services
             // _kService = kService;
         }
 
-        internal List<VaultKeep> GetById(int id)
+        internal VaultKeep GetById(int id, string userId)
         {
             VaultKeep vaultKeep = _vkRepo.GetById(id);
+            if (vaultKeep == null)
+            {
+                throw new Exception("There is no keep at this id");
+            }
+            return vaultKeep;
         }
         internal VaultKeep Create(VaultKeep vaultKeepData)
         {

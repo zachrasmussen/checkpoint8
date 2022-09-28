@@ -110,4 +110,9 @@ VALUES
   WHERE vk.vaultId = @vaultId;
 
   DELETE FROM vaultKeeps
-  WHERE id = @id
+  WHERE id = @id;
+
+
+  SELECT * 
+  FROM vaultKeeps 
+  WHERE id = @id;
