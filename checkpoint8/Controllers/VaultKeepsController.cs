@@ -27,12 +27,27 @@ namespace checkpoint8.Controllers
                 Account user = await HttpContext.GetUserInfoAsync<Account>();
                 vaultKeepData.CreatorId = user.Id;
                 VaultKeep vaultKeep = _vkService.Create(vaultKeepData);
-                vaultKeep.CreatorId = user.Id;
                 return Ok(vaultKeep);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+
+        public Task<ActionResult<VaultKeep>> GetById([FromBody] VaultKeep vaultKeepData)
+        {
+            try
+            {
+
+            }
+            catch (System.Exception)
+            {
+
+                throw;
             }
         }
 

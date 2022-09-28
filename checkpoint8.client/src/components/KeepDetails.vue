@@ -78,10 +78,12 @@
                       ></i>
                     </button>
                     <i
-                      v-if="isCreator"
-                      @click="deleteKeep"
+                      @click="deleteKeep(keep.id)"
                       class="mdi mdi-close-circle-outline d-icon"
                     ></i>
+                    <!-- <div>
+                      <img :src="keep.creator?.picture" alt="" />
+                    </div> -->
                   </div>
                 </div>
               </div>
@@ -110,7 +112,7 @@ export default {
 
       keep: computed(() => AppState.activeKeep),
       isCreator: computed(() => AppState.activeKeep?.account == AppState.account?.id),
-      async deleteKeep() {
+      async deleteKeep(id) {
         try {
           await keepsService.deleteKeep(route.params.id)
           Pop.toast('Keep Deleted', 'success')

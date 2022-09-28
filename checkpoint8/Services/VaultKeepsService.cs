@@ -7,30 +7,30 @@ namespace checkpoint8.Services
     {
         private readonly VaultKeepsRepository _vkRepo;
         private readonly VaultsService _vService;
-        private readonly KeepsService _kService;
 
-        public VaultKeepsService(VaultKeepsRepository vkRepo, VaultsService vService, KeepsService kService)
+        private readonly VaultsRepository _vRepo;
+        // private readonly KeepsService _kService;
+
+        public VaultKeepsService(VaultKeepsRepository vkRepo, VaultsService vService, VaultsRepository vRepo)
         {
             _vkRepo = vkRepo;
             _vService = vService;
-            _kService = kService;
+            _vRepo = vRepo;
+            // _kService = kService;
         }
 
-        // internal List<VaultKeep> GetById(int id)
-        // {
-        //     VaultKeep vaultKeep = _vkRepo.GetById(id);
-        // }
-        internal VaultKeep Create(VaultKeep vaultKeepData, Account user)
+        internal List<VaultKeep> GetById(int id)
         {
-            Vault original = _vService.Get(vaultKeepData.VaultId, user);
-            if (original.CreatorId != user.Id)
+            VaultKeep vaultKeep = _vkRepo.GetById(id);
+        }
+        internal VaultKeep Create(VaultKeep vaultKeepData)
+        {
+            Vault original = _vRepo.GetById(vaultKeepData.VaultId);
+            if (original.CreatorId != vaultKeepData.CreatorId)
             {
                 throw new System.Exception("You cannot add a keep to someone else's vault");
             }
-            int id = _vkRepo.Create();
-            VaultKeep vaultKeep = _kService.GetById(id);
-            vaultKeep.VaultKeepId = id;
-            return vaultKeep;
+            return _vkRepo.Create(vaultKeepData);
         }
 
 

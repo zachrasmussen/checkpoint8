@@ -43,6 +43,7 @@
     <!--  -->
   </div>
   <KeepForm />
+  <VaultForm />
 </template>
 
 <script>

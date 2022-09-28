@@ -90,10 +90,10 @@ VALUES
   vaultId INT NOT NULL,
   keepId INT NOT NULL,
 
-  FOREIGN KEY (creatorId) REFERENCES accounts(id),
   FOREIGN KEY (keepId) REFERENCES keeps(id),
   FOREIGN KEY (vaultId) REFERENCES vaults(id)
 ) default charset utf8 COMMENT '';
+
 
   INSERT INTO vaultKeeps
   (creatorId, vaultId, keepId)

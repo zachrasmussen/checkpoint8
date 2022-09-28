@@ -12,6 +12,7 @@
         <div class="modal-dialog modal-dialog-centered modal-md">
           <div class="modal-content">
             <form class="row p-3" @submit.prevent="handleSubmit">
+              <h3 class="mb-4">New Keep</h3>
               <div class="col-md-12 mb-3">
                 <label for="keep-name" class="form-label">Keep Name</label>
                 <input
@@ -38,16 +39,17 @@
                 <label for="keep-description" class="form-label"
                   >Description</label
                 >
-                <input
+                <textarea
                   v-model="editable.description"
-                  type="text"
+                  type="textarea"
+                  style="height: 100px"
                   class="form-control"
                   name="keep-name"
                   placeholder="Description"
                   required
                 />
               </div>
-              <div class="justify-content-between d-flex">
+              <div class="justify-content-end d-flex">
                 <button
                   class="btn-color rounded"
                   data-bs-dismiss="modal"

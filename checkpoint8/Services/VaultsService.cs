@@ -28,10 +28,7 @@ namespace checkpoint8.Services
             return vault;
         }
 
-        internal Vault Get(int vaultId, Account user)
-        {
-            throw new NotImplementedException();
-        }
+
 
         internal Vault Update(Vault update, Account user)
         {
