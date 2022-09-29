@@ -26,6 +26,13 @@ namespace checkpoint8.Services
             {
                 throw new Exception("There is no vault at this id");
             }
+            if (vault.isPrivate == true && vault.CreatorId != userId)
+            {
+                throw new Exception("You don't have access to that vault");
+            }
+            // TODO check if private or owner
+            // if owner, just return
+            // if not owner, only return if not private
             return vault;
         }
 

@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS keeps(
   views INT NOT NULL DEFAULT 0,
   kept INT NOT NULL,
 
-  FOREIGN KEY (creatorId) REFERENCES accounts(id)
+  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
 INSERT INTO keeps
@@ -63,7 +63,7 @@ VALUES
   description VARCHAR(255) NOT NULL,
   isPrivate BOOLEAN NOT NULL DEFAULT FALSE,
 
-  FOREIGN KEY (creatorId) REFERENCES accounts(id)
+  FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
   INSERT INTO vaults
@@ -90,9 +90,10 @@ VALUES
   vaultId INT NOT NULL,
   keepId INT NOT NULL,
 
-  FOREIGN KEY (keepId) REFERENCES keeps(id),
-  FOREIGN KEY (vaultId) REFERENCES vaults(id)
+  FOREIGN KEY (keepId) REFERENCES keeps(id) ON DELETE CASCADE,
+  FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
+
 
 
   INSERT INTO vaultKeeps

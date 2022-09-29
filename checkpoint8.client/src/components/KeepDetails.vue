@@ -127,15 +127,15 @@ export default {
 
       keep: computed(() => AppState.activeKeep),
       creator: computed(() => AppState.activeProfile),
-      isCreator: computed(() => AppState.activeKeep?.account == AppState.account?.id),
+      isCreator: computed(() => AppState.activeKeep?.creatorId == AppState.account?.id),
       async addToKeep() {
 
       },
       async deleteKeep() {
         try {
-          await keepsService.deleteKeep(route.params.id)
+          await keepsService.deleteKeep(AppState.activeKeep.id)
           Pop.toast('Keep Deleted', 'success')
-          router.push({ name: 'Home' })
+
         } catch (error) {
           Pop.error(error.message);
           logger.log(error);
