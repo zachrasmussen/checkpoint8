@@ -1,7 +1,10 @@
 using checkpoint8.Models;
 using Dapper;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using static checkpoint8.Models.Keep;
 
 namespace checkpoint8.Repositories
 {
@@ -57,12 +60,51 @@ namespace checkpoint8.Repositories
             return update;
         }
 
+        internal VaultKeepViewModel GetViewModelById(int keepId)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void Delete(int id)
         {
             string sql = @"
             DELETE FROM vaults WHERE id = @id;
             ";
             _db.Execute(sql, new { id });
+        }
+
+        internal List<Vault> GetMyVaults(string id)
+        {
+            string sql = @"
+            SELECT
+            v.*,
+            a.*
+            FROM vaults v
+            JOIN accounts a ON v.creatorId = a.id
+            WHERE a.id = @id 
+            ";
+            return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+            {
+                vault.Creator = profile;
+                return vault;
+            }, new { id }).ToList();
+        }
+
+        internal List<Vault> GetVaultsByProfile(string id)
+        {
+            string sql = @"
+            SELECT
+            v.*,
+            a.*
+            FROM vaults v
+            JOIN accounts a ON v.creatorId = a.id
+            WHERE v.creatorId = @id
+            ";
+            return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+            {
+                vault.Creator = profile;
+                return vault;
+            }, new { id }).ToList();
         }
     }
 }

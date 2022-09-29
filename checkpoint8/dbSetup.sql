@@ -116,3 +116,33 @@ VALUES
   SELECT * 
   FROM vaultKeeps 
   WHERE id = @id;
+
+  SELECT *
+  FROM accounts
+  WHERE id = @id;
+
+   SELECT
+            a.*,
+            k.*,
+            vk.id AS vaultKeepId
+            FROM vaultKeeps vk
+            JOIN keeps k ON k.id = vk.keepId
+            JOIN accounts a on a.id = k.creatorId
+            WHERE vk.vaultId = @id;
+
+             SELECT
+            vk.*,
+            a.*,
+            k.*
+            FROM vaultKeeps vk
+            JOIN keeps k ON vk.keepId = k.id
+            JOIN accounts a ON k.creatorId = a.id
+            WHERE vk.vaultId = @vaultId;
+
+            SELECT *
+            FROM accounts
+            WHERE id = @id;
+
+              SELECT *
+            FROM accounts
+            WHERE id = @id;

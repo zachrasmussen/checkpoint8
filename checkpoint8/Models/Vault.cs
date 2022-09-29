@@ -7,7 +7,7 @@ namespace checkpoint8.Models
         public string Description { get; set; }
         public bool isPrivate { get; set; }
         public Profile Creator { get; set; }
-        public int Id { get; internal set; }
+        public int Id { get; set; }
 
     }
 }

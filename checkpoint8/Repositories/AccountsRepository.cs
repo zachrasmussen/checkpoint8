@@ -47,5 +47,17 @@ namespace checkpoint8.Repositories
             _db.Execute(sql, update);
             return update;
         }
+
+        internal Account GetProfile(string id)
+        {
+            string sql = @"
+            SELECT *
+            FROM accounts
+            WHERE id = @id;
+            ";
+            return _db.QueryFirstOrDefault<Account>(sql, new { id });
+        }
     }
 }
+
+

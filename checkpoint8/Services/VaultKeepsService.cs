@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using checkpoint8.Models;
 using checkpoint8.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using static checkpoint8.Models.Keep;
 
 namespace checkpoint8.Services
 {
@@ -8,16 +11,13 @@ namespace checkpoint8.Services
     {
         private readonly VaultKeepsRepository _vkRepo;
         private readonly VaultsService _vService;
-
         private readonly VaultsRepository _vRepo;
-        // private readonly KeepsService _kService;
 
         public VaultKeepsService(VaultKeepsRepository vkRepo, VaultsService vService, VaultsRepository vRepo)
         {
             _vkRepo = vkRepo;
             _vService = vService;
             _vRepo = vRepo;
-            // _kService = kService;
         }
 
         internal VaultKeep GetById(int id, string userId)
@@ -29,6 +29,7 @@ namespace checkpoint8.Services
             }
             return vaultKeep;
         }
+
         internal VaultKeep Create(VaultKeep vaultKeepData)
         {
             Vault original = _vRepo.GetById(vaultKeepData.VaultId);
@@ -39,25 +40,21 @@ namespace checkpoint8.Services
             return _vkRepo.Create(vaultKeepData);
         }
 
-        internal System.Collections.Generic.List<VaultKeepViewModel> GetKeepsByVaultId(int id)
+        internal List<VaultKeepViewModel> GetKeepsByVaultId(int id, string userId)
         {
-            throw new NotImplementedException();
+            Vault original = _vService.GetById(id, userId);
+            List<VaultKeepViewModel> keeps = _vkRepo.GetKeepsByVaultId(id);
+            return keeps;
         }
 
-
-
-
-
-
-
-        // internal ActionResult<string> Delete(int id, Account user)
-        // {
-        //     VaultKeep original = _vkRepo.GetById(id);
-        //     if (original.CreatorId != user.Id)
-        //     {
-        //         throw new Exception("You cannot delete someone else's vault");
-        //     }
-        //     return _vkRepo.Delete(id);
-        // }
+        internal ActionResult<string> Delete(int id, Account user)
+        {
+            VaultKeep original = _vkRepo.GetById(id);
+            if (original.CreatorId != user.Id)
+            {
+                throw new Exception("You cannot delete someone else's vault");
+            }
+            return _vkRepo.Delete(id);
+        }
     }
 }

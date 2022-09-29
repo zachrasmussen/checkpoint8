@@ -54,6 +54,11 @@ namespace checkpoint8.Services
             return _keepRepo.Update(original);
         }
 
+        internal List<Keep> GetKeepsByProfile(string id)
+        {
+            return _keepRepo.GetKeepsByProfile(id);
+        }
+
         internal string Delete(int id, Account user)
         {
             Keep original = GetById(id, user.Id);

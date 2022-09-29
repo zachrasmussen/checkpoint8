@@ -10,7 +10,7 @@
     />
     <div class="justify-content-evenly d-flex title-card">
       <h3 class="text-white text-start p-2 item-name text-center">
-        {{ keep.name }}
+        {{ vault.name }}
       </h3>
       <!-- <img
         :src="keep?.creator.picture"
@@ -19,19 +19,19 @@
       /> -->
     </div>
   </div>
-  <KeepDetails />
+  <VaultDetails />
 </template>
 
 <script>
 import { Modal } from 'bootstrap';
 import { logger } from '../utils/Logger';
-import { keepsService } from '../services/KeepsService';
-import KeepDetails from './KeepDetails.vue';
+import { vaultsService } from '../services/KeepsService';
+import VaultDetails from './KeepDetails.vue';
 
 export default {
 
   props: {
-    keep: {
+    vault: {
       type: Object,
       required: true
     }
@@ -42,14 +42,14 @@ export default {
       async setActive() {
         try {
           // Modal.getOrCreateInstance(document.getElementById("keep-details")).toggle();
-          await keepsService.getById(props.keep.id)
+          await vaultsService.getById(props.vault.id)
         } catch (error) {
           logger.error(error);
         }
       }
     };
   },
-  components: { KeepDetails }
+  components: { VaultDetails }
 };
 </script>
 <style>

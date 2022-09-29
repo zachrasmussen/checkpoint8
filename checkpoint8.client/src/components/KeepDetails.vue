@@ -77,13 +77,29 @@
                         class="mdi mdi-arrow-down-drop-circle-outline ms-2"
                       ></i>
                     </button>
+
                     <i
-                      @click="deleteKeep(keep.id)"
+                      v-if="isCreator"
+                      @click="deleteKeep"
                       class="mdi mdi-close-circle-outline d-icon"
                     ></i>
-                    <!-- <div>
-                      <img :src="keep.creator?.picture" alt="" />
-                    </div> -->
+
+                    <div>
+                      <router-link
+                        v-if="keep"
+                        :to="{
+                          name: 'Profile',
+                          params: { id: keep?.creator.id },
+                        }"
+                      >
+                        <img
+                          :src="keep?.creator.picture"
+                          class="creator-img rounded-circle"
+                          alt=""
+                          data-bs-dismiss="modal"
+                        />
+                      </router-link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -102,17 +118,20 @@ import { keepsService } from '../services/KeepsService';
 import Pop from '../utils/Pop';
 import { router } from '../router';
 import { logger } from '../utils/Logger';
+import { useRoute } from 'vue-router';
 
 export default {
   setup() {
+    const route = useRoute();
     return {
+
+      keep: computed(() => AppState.activeKeep),
+      creator: computed(() => AppState.activeProfile),
+      isCreator: computed(() => AppState.activeKeep?.account == AppState.account?.id),
       async addToKeep() {
 
       },
-
-      keep: computed(() => AppState.activeKeep),
-      isCreator: computed(() => AppState.activeKeep?.account == AppState.account?.id),
-      async deleteKeep(id) {
+      async deleteKeep() {
         try {
           await keepsService.deleteKeep(route.params.id)
           Pop.toast('Keep Deleted', 'success')
@@ -121,7 +140,10 @@ export default {
           Pop.error(error.message);
           logger.log(error);
         }
-      }
+      },
+
+
+
 
     };
   },
@@ -158,5 +180,8 @@ export default {
 }
 .m-height {
   max-height: 20vh;
+}
+.creator-img {
+  height: 50px;
 }
 </style>

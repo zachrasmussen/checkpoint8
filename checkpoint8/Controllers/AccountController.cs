@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using checkpoint8.Models;
 using checkpoint8.Services;
@@ -13,12 +14,12 @@ namespace checkpoint8.Controllers
     public class AccountController : ControllerBase
     {
         private readonly AccountService _accountService;
-        // private readonly VaultsService _vService;
+        private readonly VaultsService _vService;
 
-        public AccountController(AccountService accountService)
+        public AccountController(AccountService accountService, VaultsService vService)
         {
             _accountService = accountService;
-            // _vService = _vService;
+            _vService = vService;
         }
 
         [HttpGet]
@@ -36,20 +37,36 @@ namespace checkpoint8.Controllers
             }
         }
 
-        //         [HttpGet("vaults")]
-        //         [Authorize]
-        //         public async Task<ActionResult<List<Vault>> Get()
-        //                 {
-        //                     try
-        //                     {
-        //                         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        //                         return _vService.Get(user.Id);
-        //                     }
-        //                     catch (Exception e)
-        //                     {
-        //                         return BadRequest(e.Message);
+        [HttpGet("vaults")]
+        [Authorize]
+        public async Task<ActionResult<List<Vault>>> GetVaultsByProfile(string id)
+        {
+            try
+            {
+                Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                List<Vault> vaults = _vService.GetMyVaults(userInfo.Id);
+                return Ok(vaults);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        // [HttpGet("/vaults")]
+        // [Authorize]
+        // public async Task<ActionResult<List<Vault>>> GetVaultsByAccount(string id)
+        // {
+        //     try
+        //     {
+        //         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        //         return _vService.GetMyVaults(id);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         return BadRequest(e.Message);
+        //     }
         // }
-        //                 }
     }
 
 

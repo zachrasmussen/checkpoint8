@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using checkpoint8.Models;
 using checkpoint8.Repositories;
 
@@ -28,8 +29,6 @@ namespace checkpoint8.Services
             return vault;
         }
 
-
-
         internal Vault Update(Vault update, Account user)
         {
             Vault original = GetById(update.Id, user.Id);
@@ -53,6 +52,11 @@ namespace checkpoint8.Services
             }
             _vaultRepo.Delete(id);
             return $"{original.Name} was delete.";
+        }
+
+        internal List<Vault> GetMyVaults(string id)
+        {
+            return _vaultRepo.GetMyVaults(id);
         }
     }
 }
