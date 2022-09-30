@@ -48,12 +48,14 @@ namespace checkpoint8.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        // TODO GetVaultsByProfile
+        // Format similar to below
         [HttpGet("{id}/vaults")]
         public ActionResult<List<Vault>> GetVaultsByProfile(string id)
         {
             try
             {
+                // Account userInfo = 
                 List<Vault> vaults = _vService.GetMyVaults(id);
                 return Ok(vaults);
             }

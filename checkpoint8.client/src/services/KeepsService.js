@@ -17,6 +17,12 @@ class KeepsService {
         // logger.log('[Active]', AppState.activeKeep)
     }
 
+    async getProfileKeeps(id) {
+        const res = await api.get(`api/profiles/${id}/keeps`)
+        AppState.keeps = res.data
+
+    }
+
     async deleteKeep(id) {
         const res = await api.delete('api/keeps/' + id)
         logger.log('keep deleted', res.data)

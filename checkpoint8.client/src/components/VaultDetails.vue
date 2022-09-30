@@ -1,11 +1,11 @@
 <template>
-  <!-- SECTION once the KeepCard is clicked, this is the modal that pops up. -->
+  <!-- SECTION once the VaultCard is clicked, this is the modal that pops up. -->
 
   <div class="row m-height">
     <div class="col-12">
       <div
         class="modal fade"
-        id="keep-details"
+        id="vault-details"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
@@ -76,19 +76,7 @@
                       <i
                         class="mdi mdi-arrow-down-drop-circle-outline ms-2"
                       ></i>
-                      <ul class="dropdown-menu">
-                        <div v-for="v in vaults" :key="v.id">
-                          <vault-selection :vault="v" />
-                        </div>
-                      </ul>
                     </button>
-
-                    <i
-                      v-if="isCreator"
-                      @click="deleteKeep"
-                      class="mdi mdi-close-circle-outline d-icon"
-                      data-bs-dismiss="modal"
-                    ></i>
 
                     <div>
                       <router-link

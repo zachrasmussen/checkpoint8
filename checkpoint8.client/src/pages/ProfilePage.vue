@@ -26,7 +26,11 @@
           </span>
         </h4>
       </div>
-      <div></div>
+      <div class="row">
+        <div class="" v-for="v in vaults" :key="v.id">
+          <VaultCard :vault="v" />
+        </div>
+      </div>
     </div>
     <!--  -->
     <!-- SECTION user's keeps -->
@@ -38,8 +42,11 @@
             ⊕
           </span>
         </h4>
-
-        <!-- {{ profile?.keeps }} -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="" v-for="k in keeps" :key="k.id">
+        <KeepCard :keep="k" />
       </div>
     </div>
   </div>
@@ -54,29 +61,39 @@ import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 import { profilesService } from '../services/ProfilesService'
 import { useRoute } from 'vue-router';
+import { keepsService } from '../services/KeepsService'
+import { vaultsService } from '../services/VaultsService'
+
+
 export default {
-  name: 'Profile',
-  props: {
-    keep: {
-      type: Object,
-      required: true
-    }
-  },
+
 
   setup() {
     const route = useRoute();
+
     async function getActiveProfile() {
       try {
         await profilesService.getProfile(route.params.id);
 
       } catch (error) {
         logger.log(error);
-        router.push({ name: 'Home' })
+      }
+    }
+
+    async function getVaultsByProfile() {
+      try {
+        logger.log('Testing Vaults', route.params.id)
+        await vaultsService.getVaultsByProfile(route.params.id)
+        logger.log('[Active]', AppState.activeVault)
+      } catch (error) {
+        logger.log(error)
       }
     }
     async function getProfileKeeps() {
       try {
-        await profilesService.getProfileKeeps(route.params.id);
+        logger.log('Testing Keeps', route.params.id)
+        await keepsService.getProfileKeeps(route.params.id);
+        // console.log('[Profile Keeps]', 'we got keeps')
       }
       catch (error) {
         logger.log(error)
@@ -84,14 +101,16 @@ export default {
     }
     onMounted(() => {
       getActiveProfile();
-      // getProfileKeeps()
+      getProfileKeeps();
+      getVaultsByProfile();
     });
     return {
       account: computed(() => AppState.account),
       profile: computed(() => AppState.activeProfile),
-      keep: computed(() => AppState.profileKeeps)
-    }
-  }
+      keeps: computed(() => AppState.keeps),
+      vaults: computed(() => AppState.vaults),
+    };
+  },
 
 }
 </script>

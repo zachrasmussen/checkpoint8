@@ -24,12 +24,18 @@ namespace checkpoint8.Services
             Vault vault = _vaultRepo.GetById(id);
             if (vault == null)
             {
-                throw new Exception("There is no vault at this id");
+                if (vault.isPrivate == true)
+                {
+                    throw new Exception("This is a private vault");
+                }
+                return vault;
             }
             if (vault.isPrivate == true && vault.CreatorId != userId)
             {
                 throw new Exception("You don't have access to that vault");
             }
+
+
             // TODO check if private or owner
             // if owner, just return
             // if not owner, only return if not private
@@ -64,6 +70,15 @@ namespace checkpoint8.Services
         internal List<Vault> GetMyVaults(string id)
         {
             return _vaultRepo.GetMyVaults(id);
+
+
+            // vaults = vaults.FindAll(v => v.isPrivate == false || v.CreatorId == id);
+            // return vaults;
+
+
         }
+
+
+
     }
 }

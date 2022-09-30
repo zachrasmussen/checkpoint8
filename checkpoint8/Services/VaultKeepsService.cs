@@ -37,6 +37,7 @@ namespace checkpoint8.Services
             {
                 throw new System.Exception("You cannot add a keep to someone else's vault");
             }
+            // _kService.AddKept(vaultKeepData);
             return _vkRepo.Create(vaultKeepData);
         }
 

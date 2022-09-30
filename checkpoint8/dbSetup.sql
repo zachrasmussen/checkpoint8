@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS keeps(
 INSERT INTO keeps
 (creatorId, name, description, img, views, kept)
 VALUES
-('63289a99b1a60e1497f3f2e9', 'MrBeast', 'This is totally awesome', 'https://helios-i.mashable.com/imagery/articles/00AxnPvg6PSo6ToUtjc7YVr/hero-image.fill.size_1200x1200.v1650398912.png', 100, 5 );
+('63289a99b1a60e1497f3f2e9', 'MrBeast', 'This is totally awesome', 'https://helios-i.mashable.com/imagery/articles/00AxnPvg6PSo6ToUtjc7YVr/hero-image.fill.size_1200x1200.v1650398912.png', 100, 1 );
 
 INSERT INTO keeps
 (creatorId, name, description, img, views, kept)
