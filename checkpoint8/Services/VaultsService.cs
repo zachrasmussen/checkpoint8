@@ -34,12 +34,12 @@ namespace checkpoint8.Services
             {
                 throw new Exception("You don't have access to that vault");
             }
-
+            return vault;
 
             // TODO check if private or owner
             // if owner, just return
             // if not owner, only return if not private
-            return vault;
+
         }
 
         internal Vault Update(Vault update, Account user)

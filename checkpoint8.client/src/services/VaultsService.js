@@ -35,6 +35,20 @@ class VaultsService {
         logger.log('Created Vault', res.data)
         AppState.vaults.push(res.data)
     }
+
+    async myAccountVaults() {
+        const res = await api.get('account/vaults')
+        logger.log('Got My Vaults', res.data)
+        AppState.myVaults = res.data
+    }
+
+    // async getMyVaults() {
+    //     const res = await api.get('api/account/vaults')
+    //     AppState.myVaults = res.data
+    // }
+    // my account vaults
+    // Appstate.myVaults = res.data
+
 }
 
 export const vaultsService = new VaultsService()

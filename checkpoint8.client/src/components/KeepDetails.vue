@@ -71,15 +71,20 @@
                     </div>
                   </div>
                   <div class="modal-footer justify-content-between d-flex">
-                    <button class="btn-color rounded" @click="addToVault">
+                    <button class="btn-color rounded" data-bs-toggle="dropdown">
                       ADD TO VAULT
                       <i
                         class="mdi mdi-arrow-down-drop-circle-outline ms-2"
                       ></i>
                       <ul class="dropdown-menu">
-                        <div v-for="v in vaults" :key="v.id">
-                          <vault-selection :vault="v" />
-                        </div>
+                        <option
+                          class="selectable"
+                          v-for="v in vaults"
+                          :key="v.id"
+                          @click="addToVault"
+                        >
+                          {{ v.name }}
+                        </option>
                       </ul>
                     </button>
 
@@ -125,6 +130,7 @@ import Pop from '../utils/Pop';
 import { router } from '../router';
 import { logger } from '../utils/Logger';
 import { useRoute } from 'vue-router';
+import { vaultsService } from '../services/VaultsService';
 
 export default {
   setup() {
@@ -134,6 +140,7 @@ export default {
       keep: computed(() => AppState.activeKeep),
       creator: computed(() => AppState.activeProfile),
       isCreator: computed(() => AppState.activeKeep?.creatorId == AppState.account?.id),
+      vaults: computed(() => AppState.vaults),
       async addToKeep() {
 
       },
@@ -147,6 +154,17 @@ export default {
           logger.log(error);
         }
       },
+      // async addToVault() {
+      //   try {
+      //     let keep = { vault: route.params.id }
+      //     await vaultsService.myAccountVaults(keep)
+      //     logger.log('[DID THIS WORK]', 'did this work?')
+      //     let vault = { keep: route.params.id }
+      //     await keepsService.getKeeps(vault)
+      //   } catch (error) {
+      //     logger.log(error);
+      //   }
+      // }
 
 
 

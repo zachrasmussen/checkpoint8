@@ -2,19 +2,19 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
-        <h4 class="offset-1">{{ vault.name }}</h4>
-        <button
-          class=""
-          v-if="vault?.creator.id == account.id"
-          @click="deleteVault(vault.id)"
-        >
+        <h4 class="offset-1">{{ vault?.name }}</h4>
+        <h1>test</h1>
+        <button class="btn-color rounded" @click="deleteVault">
           Delete Vault
         </button>
       </div>
     </div>
     <div class="row">
-      <div class="" v-for="k in keeps" :key="k.id" :keep="k"></div>
-      <VaultCard />
+      <div class="masonry">
+        <div class="" v-for="vk in vaultKeeps" :key="vk.id">
+          <KeepCard :vaultKeep="vk" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -24,21 +24,55 @@ import { computed, onMounted } from '@vue/runtime-core';
 import { logger } from '../utils/Logger';
 import { vaultsService } from '../services/VaultsService';
 import { AppState } from '../AppState';
+import { useRoute } from 'vue-router';
+import { vaultKeepsService } from '../services/VaultKeepsService';
 export default {
   name: 'Home',
   setup() {
-    async function getVaults() {
+    const route = useRoute();
+
+    //computed active vaults
+    async function getVaultKeep() {
       try {
-        await vaultsService.getById();
-      } catch (error) {
-        logger.log(error);
+
+        logger.log('Testing Keeps', route.params.id)
+        await vaultKeepsService.getVaultKeep(route.params.id);
+        // console.log('[Profile Keeps]', 'we got keeps')
+      }
+      catch (error) {
+        logger.log(error)
       }
     }
-    onMounted(() => {
-      getVaults();
+
+
+
+    onMounted(async () => {
+      getVaultKeep()
     });
     return {
-      vaults: computed(() => AppState.vaults)
+      // async getVaultKeep() {
+      //   try {
+      //     logger.log('Testing Keeps', route.params.id)
+      //     await vaultKeepsService.getVaultKeep(route.params.id);
+      //     // console.log('[Profile Keeps]', 'we got keeps')
+      //   }
+      //   catch (error) {
+      //     logger.log(error)
+      //   }
+      // },
+      async deleteVault() {
+        try {
+          await vaultKeepsService.deleteVault(AppState.activeVault.id)
+          Pop.toast('Vault Deleted', 'success')
+        } catch (error) {
+          logger.log(error);
+        }
+      },
+
+      vault: computed(() => AppState.activeVault),
+      account: computed(() => AppState.account),
+      vaultKeeps: computed(() => AppState.vaultKeeps),
+
     }
   }
 }
@@ -53,5 +87,11 @@ export default {
     display: block;
     margin-bottom: 1em;
   }
+}
+.btn-color {
+  background-color: #0096fa;
+  border: none;
+  padding: 10px 20px;
+  color: white;
 }
 </style>

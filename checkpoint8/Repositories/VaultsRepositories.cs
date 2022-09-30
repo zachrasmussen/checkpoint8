@@ -98,7 +98,7 @@ namespace checkpoint8.Repositories
             a.*
             FROM vaults v
             JOIN accounts a ON v.creatorId = a.id
-            WHERE v.creatorId = @id
+            WHERE v.creatorId = @id AND isPrivate = false
             ";
             return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
             {
