@@ -5,6 +5,7 @@
         <h4>Keepr</h4>
       </div>
     </router-link>
+
     <button
       class="navbar-toggler"
       type="button"
@@ -16,6 +17,7 @@
     >
       <span class="navbar-toggler-icon" />
     </button>
+
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li></li>

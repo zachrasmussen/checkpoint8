@@ -69,6 +69,7 @@ namespace checkpoint8.Services
 
         internal List<Vault> GetMyVaults(string id)
         {
+
             return _vaultRepo.GetMyVaults(id);
 
 
@@ -77,7 +78,6 @@ namespace checkpoint8.Services
 
 
         }
-
 
 
     }

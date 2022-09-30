@@ -41,7 +41,6 @@ export default {
 
       async setActive() {
         try {
-          // Modal.getOrCreateInstance(document.getElementById("keep-details")).toggle();
           await keepsService.getById(props.keep.id)
         } catch (error) {
           logger.error(error);

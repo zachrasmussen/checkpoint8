@@ -86,7 +86,7 @@ export default {
       editable,
       async createVault() {
         try {
-          await vaultsService.create(props.vault.id)
+          await vaultsService.createVault(props.vault.id)
         } catch (error) {
           logger.error(error);
         }

@@ -21,18 +21,23 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
+          <span
+            class="add"
+            data-bs-toggle="modal"
+            data-bs-target="#vault-form"
+            v-if="yourProfile"
+          >
             ⊕
           </span>
         </h4>
       </div>
-      <div class="row">
-        <div class="" v-for="v in vaults" :key="v.id">
-          <VaultCard :vault="v" />
-        </div>
+    </div>
+    <div class="row">
+      <div class="" v-for="v in vaults" :key="v.id">
+        <VaultCard :vault="v" />
       </div>
     </div>
-    <!--  -->
+
     <!-- SECTION user's keeps -->
     <div class="row">
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
@@ -45,7 +50,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="" v-for="k in keeps" :key="k.id">
+      <div class="masonry mb-5 offset-1" v-for="k in keeps" :key="k.id">
         <KeepCard :keep="k" />
       </div>
     </div>
@@ -109,6 +114,7 @@ export default {
       profile: computed(() => AppState.activeProfile),
       keeps: computed(() => AppState.keeps),
       vaults: computed(() => AppState.vaults),
+      yourProfile: computed(() => AppState.activeKeep?.creatorId == AppState.account?.id),
     };
   },
 
@@ -122,5 +128,14 @@ export default {
 .add {
   color: #0096fa;
   cursor: pointer;
+}
+.masonry {
+  columns: 300px;
+  column-gap: 1em;
+
+  div {
+    display: block;
+    margin-bottom: 1em;
+  }
 }
 </style>
