@@ -11,12 +11,21 @@
     <div class="justify-content-evenly d-flex title-card">
       <h3 class="text-white text-start p-2 item-name text-center">
         {{ keep.name }}
+        <router-link
+          v-if="keep"
+          :to="{
+            name: 'Profile',
+            params: { id: keep?.creator.id },
+          }"
+        >
+          <img
+            :src="keep?.creator.picture"
+            class="creator-img rounded-circle"
+            alt=""
+            data-bs-dismiss="modal"
+          />
+        </router-link>
       </h3>
-      <!-- <img
-        :src="keep?.creator.picture"
-        class="creator-img rounded-circle"
-        alt=""
-      /> -->
     </div>
   </div>
   <KeepDetails />

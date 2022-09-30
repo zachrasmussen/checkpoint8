@@ -31,8 +31,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="masonry mt-3">
-        <div class="" v-for="v in vaults" :key="v.id">
+      <div class="masonry mt-3 p-5">
+        <div class="shadow" v-for="v in vaults" :key="v.id">
           <VaultCard :vault="v" />
         </div>
       </div>
@@ -55,10 +55,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="">
-        <div class="masonry mb-5 offset-1" v-for="k in keeps" :key="k.id">
-          <KeepCard :keep="k" />
-        </div>
+      <div class="masonry mb-5 offset-1" v-for="k in keeps" :key="k.id">
+        <KeepCard :keep="k" />
       </div>
     </div>
   </div>

@@ -56,7 +56,7 @@ namespace checkpoint8.Controllers
             try
             {
                 // Account userInfo = 
-                List<Vault> vaults = _vService.GetMyVaults(id);
+                List<Vault> vaults = _vService.GetProfileVaults(id);
                 return Ok(vaults);
             }
             catch (Exception e)

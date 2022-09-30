@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">{{ vault?.name }}</h4>
-        <h1>test</h1>
+
         <button class="btn-color rounded" @click="deleteVault">
           Delete Vault
         </button>
@@ -12,7 +12,7 @@
     <div class="row">
       <div class="masonry">
         <div class="" v-for="vk in vaultKeeps" :key="vk.id">
-          <KeepCard :vaultKeep="vk" />
+          <KeepCard :keep="vk" />
         </div>
       </div>
     </div>
@@ -24,13 +24,14 @@ import { computed, onMounted } from '@vue/runtime-core';
 import { logger } from '../utils/Logger';
 import { vaultsService } from '../services/VaultsService';
 import { AppState } from '../AppState';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { vaultKeepsService } from '../services/VaultKeepsService';
 export default {
+
   name: 'Home',
   setup() {
     const route = useRoute();
-
+    const router = useRouter();
     //computed active vaults
     async function getVaultKeep() {
       try {
@@ -41,13 +42,22 @@ export default {
       }
       catch (error) {
         logger.log(error)
+        router.push({ name: 'Home' })
       }
     }
 
+    async function getVaultById() {
+      try {
+        await vaultsService.getById(route.params.id)
+      } catch (error) {
+        logger.log(error)
+      }
 
+    }
 
     onMounted(async () => {
       getVaultKeep()
+      getVaultById()
     });
     return {
       // async getVaultKeep() {
@@ -60,9 +70,10 @@ export default {
       //     logger.log(error)
       //   }
       // },
+      router,
       async deleteVault() {
         try {
-          await vaultKeepsService.deleteVault(AppState.activeVault.id)
+          await vaultsService.deleteVault(AppState.activeVault.id)
           Pop.toast('Vault Deleted', 'success')
         } catch (error) {
           logger.log(error);
