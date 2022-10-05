@@ -8,8 +8,19 @@
       data-bs-toggle="modal"
       data-bs-target="#keep-details"
     />
-    <div class="justify-content-evenly d-flex title-card">
-      <h3 class="text-white text-start p-2 item-name text-center">
+    <div class="title-card m-2">
+      <h3
+        class="
+          text-white text-start
+          justify-content-between
+          d-flex
+          align-items-center
+          p-3
+          item-name
+          w-100
+          text-start
+        "
+      >
         {{ keep.name }}
         <router-link
           v-if="keep"
