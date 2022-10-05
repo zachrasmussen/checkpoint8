@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <!--  -->
+
     <!-- SECTION user's vaults -->
     <div class="row">
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
