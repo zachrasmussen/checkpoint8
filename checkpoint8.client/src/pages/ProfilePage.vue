@@ -19,7 +19,12 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
+          <span
+            v-if="yourProfile"
+            class="add"
+            data-bs-toggle="modal"
+            data-bs-target="#vault-form"
+          >
             ⊕
           </span>
         </h4>
@@ -38,15 +43,22 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Keeps
-          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form">
+          <span
+            v-if="yourProfile"
+            class="add"
+            data-bs-toggle="modal"
+            data-bs-target="#keep-form"
+          >
             ⊕
           </span>
         </h4>
       </div>
     </div>
     <div class="row">
-      <div class="masonry mb-5 offset-1" v-for="k in keeps" :key="k.id">
-        <KeepCard :keep="k" />
+      <div class="masonry mt-3 p-5 offset-1">
+        <div class="" v-for="k in keeps" :key="k.id">
+          <KeepCard :keep="k" />
+        </div>
       </div>
     </div>
   </div>
@@ -109,7 +121,7 @@ export default {
       profile: computed(() => AppState.activeProfile),
       keeps: computed(() => AppState.keeps),
       vaults: computed(() => AppState.vaults),
-      yourProfile: computed(() => AppState.activeKeep?.creatorId == AppState.account?.id),
+      yourProfile: computed(() => AppState.activeKeep?.creatorId == AppState.account?.id)
     };
   },
 
