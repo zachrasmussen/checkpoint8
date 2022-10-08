@@ -25,6 +25,17 @@
                 />
               </div>
               <div class="col-md-12 mb-3">
+                <label for="vault-img" class="form-label">Desc</label>
+                <input
+                  v-model="editable.description"
+                  type="text"
+                  class="form-control"
+                  name="vault-img"
+                  placeholder="Add a description"
+                  required
+                />
+              </div>
+              <div class="col-md-12 mb-3">
                 <label for="vault-img" class="form-label">Image</label>
                 <input
                   v-model="editable.img"
@@ -86,7 +97,7 @@ export default {
       editable,
       async createVault() {
         try {
-          await vaultsService.createVault(props.vault.id)
+          await vaultsService.createVault(editable.value)
         } catch (error) {
           logger.error(error);
         }

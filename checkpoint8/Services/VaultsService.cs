@@ -34,12 +34,12 @@ namespace checkpoint8.Services
             {
                 throw new Exception("You don't have access to that vault");
             }
-
+            return vault;
 
             // TODO check if private or owner
             // if owner, just return
             // if not owner, only return if not private
-            return vault;
+
         }
 
         internal Vault Update(Vault update, Account user)
@@ -67,16 +67,16 @@ namespace checkpoint8.Services
             return $"{original.Name} was delete.";
         }
 
+        internal List<Vault> GetProfileVaults(string id)
+        {
+            List<Vault> vaults = _vaultRepo.GetUserVaults(id);
+            vaults = vaults.FindAll(v => v.isPrivate == false);
+            return vaults;
+        }
+
         internal List<Vault> GetMyVaults(string id)
         {
-
-            return _vaultRepo.GetMyVaults(id);
-
-
-            // vaults = vaults.FindAll(v => v.isPrivate == false || v.CreatorId == id);
-            // return vaults;
-
-
+            return _vaultRepo.GetUserVaults(id);
         }
 
 

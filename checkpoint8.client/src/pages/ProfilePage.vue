@@ -10,31 +10,26 @@
         </div>
         <div class="col-8 justify-content-start">
           <h1>{{ profile?.name }}</h1>
-          <h5>Vaults:</h5>
-          <h5>Keeps:</h5>
         </div>
       </div>
     </div>
-    <!--  -->
+
     <!-- SECTION user's vaults -->
     <div class="row">
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span
-            class="add"
-            data-bs-toggle="modal"
-            data-bs-target="#vault-form"
-            v-if="yourProfile"
-          >
+          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
             ⊕
           </span>
         </h4>
       </div>
     </div>
     <div class="row">
-      <div class="" v-for="v in vaults" :key="v.id">
-        <VaultCard :vault="v" />
+      <div class="masonry mt-3 p-5">
+        <div class="shadow" v-for="v in vaults" :key="v.id">
+          <VaultCard :vault="v" />
+        </div>
       </div>
     </div>
 

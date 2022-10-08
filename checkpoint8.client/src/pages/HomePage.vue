@@ -2,7 +2,6 @@
   <div class="container-fluid">
     <div class="row">
       <div class="masonry">
-        <!-- k in profileKeeps -->
         <div class="" v-for="k in keeps" :key="k.id">
           <KeepCard :keep="k" />
         </div>

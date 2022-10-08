@@ -12,12 +12,14 @@ namespace checkpoint8.Services
         private readonly VaultKeepsRepository _vkRepo;
         private readonly VaultsService _vService;
         private readonly VaultsRepository _vRepo;
+        private readonly KeepsRepository _kRepo;
 
-        public VaultKeepsService(VaultKeepsRepository vkRepo, VaultsService vService, VaultsRepository vRepo)
+        public VaultKeepsService(VaultKeepsRepository vkRepo, VaultsService vService, VaultsRepository vRepo, KeepsRepository kRepo)
         {
             _vkRepo = vkRepo;
             _vService = vService;
             _vRepo = vRepo;
+            _kRepo = kRepo;
         }
 
         internal VaultKeep GetById(int id, string userId)
@@ -38,7 +40,11 @@ namespace checkpoint8.Services
                 throw new System.Exception("You cannot add a keep to someone else's vault");
             }
             // _kService.AddKept(vaultKeepData);
+            Keep foundKeep = _kRepo.GetById(vaultKeepData.KeepId);
+            foundKeep.Kept++;
+            _kRepo.Update(foundKeep);
             return _vkRepo.Create(vaultKeepData);
+
         }
 
         internal List<VaultKeepViewModel> GetKeepsByVaultId(int id, string userId)

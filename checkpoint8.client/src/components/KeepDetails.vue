@@ -71,16 +71,33 @@
                     </div>
                   </div>
                   <div class="modal-footer justify-content-between d-flex">
-                    <button class="btn-color rounded" @click="addToVault">
+                    <button
+                      v-if="!vaultKeep"
+                      class="btn-color rounded"
+                      data-bs-toggle="dropdown"
+                    >
                       ADD TO VAULT
                       <i
                         class="mdi mdi-arrow-down-drop-circle-outline ms-2"
                       ></i>
                       <ul class="dropdown-menu">
-                        <div v-for="v in vaults" :key="v.id">
-                          <vault-selection :vault="v" />
-                        </div>
+                        <option
+                          class="selectable"
+                          v-for="v in vaults"
+                          :key="v.id"
+                          @click="addToVault(v.id)"
+                        >
+                          {{ v.name }}
+                        </option>
                       </ul>
+                    </button>
+                    <button
+                      v-if="vaultKeep"
+                      @click="deleteFromVault(vaultKeep.vaultKeepId)"
+                      data-bs-dismiss="modal"
+                      class="btn-color rounded"
+                    >
+                      Remove From Vault
                     </button>
 
                     <i
@@ -125,6 +142,8 @@ import Pop from '../utils/Pop';
 import { router } from '../router';
 import { logger } from '../utils/Logger';
 import { useRoute } from 'vue-router';
+import { vaultsService } from '../services/VaultsService';
+import { vaultKeepsService } from '../services/VaultKeepsService';
 
 export default {
   setup() {
@@ -132,8 +151,10 @@ export default {
     return {
 
       keep: computed(() => AppState.activeKeep),
+      vaultKeep: computed(() => AppState.vaultKeeps.find(vk => vk.id == AppState.activeKeep?.id)),
       creator: computed(() => AppState.activeProfile),
       isCreator: computed(() => AppState.activeKeep?.creatorId == AppState.account?.id),
+      vaults: computed(() => AppState.myVaults),
       async addToKeep() {
 
       },
@@ -147,6 +168,28 @@ export default {
           logger.log(error);
         }
       },
+      async addToVault(vaultId) {
+        try {
+          let keep = { keepId: AppState.activeKeep.id, vaultId }
+          logger.log('[DID THIS WORK]', keep)
+          await vaultKeepsService.creatVaultKeep(keep)
+          // await vaultsService.myAccountVaults(keep)
+          this.keep.kept++
+
+          // await keepsService.getKeeps(keep)
+          // logger.log('trying this relationship', keep)
+        } catch (error) {
+          logger.log(error);
+        }
+      },
+      async deleteFromVault(vaultKeepId) {
+        try {
+          await vaultKeepsService.deleteVaultKeep(vaultKeepId)
+
+        } catch (error) {
+          logger.log(error)
+        }
+      }
 
 
 
