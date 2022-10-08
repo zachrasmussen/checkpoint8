@@ -5,22 +5,22 @@
       params: { id: vault.id },
     }"
   >
-    <div class="p-3 vault-title-card bg-primary">
+    <div class="p-3 vault-title-card rounded">
       <img
-        class="vault-img img-fluid rounded shadow selectable"
+        class="vault-img img-fluid rounded selectable"
         :src="vault.img"
         alt=""
       />
-      <div class="title-card justify-content-center d-flex p-3">
-        <h3 class="text-white text-start p-2 item-name text-center">
+      <!-- <div class="title-card justify-content-center d-flex p-3">
+        <h3 class="text-white text-start p-2 vault-name text-center">
           {{ vault.name }}
         </h3>
-        <!-- <img
-        :src="vault?.creator.picture"
-        class="creator-img rounded-circle"
-        alt=""
-      /> -->
-      </div>
+        <img
+          :src="vault?.creator.picture"
+          class="creator-img rounded-circle"
+          alt=""
+        />
+      </div> -->
     </div>
     <VaultDetails />
   </router-link>
@@ -63,13 +63,11 @@ export default {
   position: relative;
 }
 
-.item-name {
+.vault-name {
   position: absolute;
   bottom: 0;
-  background: rgba(218, 217, 217, 0.4);
-  border: 0.5px solid #a3a3a3;
-  backdrop-filter: blur(10px);
-  font-size: 1em;
+  font-size: 1.25em;
+  text-shadow: 1px 1px 1px #000000;
 }
 .creator-img {
   width: 50px;

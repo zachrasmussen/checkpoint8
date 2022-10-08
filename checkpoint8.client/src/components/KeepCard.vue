@@ -8,7 +8,7 @@
       data-bs-toggle="modal"
       data-bs-target="#keep-details"
     />
-    <div class="keep-title-card m-2">
+    <!-- <div class="keep-title-card m-2">
       <h3
         class="
           text-white text-start
@@ -37,7 +37,7 @@
           />
         </router-link>
       </h3>
-    </div>
+    </div> -->
   </div>
   <KeepDetails />
 </template>

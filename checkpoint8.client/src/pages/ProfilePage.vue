@@ -19,20 +19,15 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span
-            v-if="yourProfile"
-            class="add"
-            data-bs-toggle="modal"
-            data-bs-target="#vault-form"
-          >
+          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
             ⊕
           </span>
         </h4>
       </div>
     </div>
     <div class="row">
-      <div class="masonry mt-3 p-5">
-        <div class="shadow" v-for="v in vaults" :key="v.id">
+      <div class="masonry mt-3 p-5 offset-1">
+        <div class="" v-for="v in vaults" :key="v.id">
           <VaultCard :vault="v" />
         </div>
       </div>
@@ -43,12 +38,7 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Keeps
-          <span
-            v-if="yourProfile"
-            class="add"
-            data-bs-toggle="modal"
-            data-bs-target="#keep-form"
-          >
+          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form">
             ⊕
           </span>
         </h4>
@@ -140,6 +130,13 @@ export default {
   columns: 300px;
   column-gap: 1em;
 
+  div {
+    display: block;
+    margin-bottom: 1em;
+  }
+}
+.masonry-vault {
+  width: 300px;
   div {
     display: block;
     margin-bottom: 1em;

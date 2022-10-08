@@ -61,15 +61,16 @@ VALUES
   creatorId VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
+  img VARCHAR(1000) NOT NULL,
   isPrivate BOOLEAN NOT NULL DEFAULT FALSE,
 
   FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
   INSERT INTO vaults
-  (creatorId, name, description, isPrivate )
+  (creatorId, name, description, img, isPrivate )
   VALUES
-  ('632de23478f477ac2ae35864', 'Test Name', 'Test Description', True );
+  ('632de23478f477ac2ae35864', 'YouTube', 'I LOVE YouTube', "https://cdn.mos.cms.futurecdn.net/8gzcr6RpGStvZFA2qRt4v6-1200-80.jpg", True );
   
   SELECT
   v.*,

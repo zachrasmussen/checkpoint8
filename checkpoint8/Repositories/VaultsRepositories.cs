@@ -20,9 +20,9 @@ namespace checkpoint8.Repositories
         {
             string sql = @"
             INSERT INTO vaults
-            (creatorId, name, description, isPrivate)
+            (creatorId, name, description, img, isPrivate)
             VALUES
-            (@CreatorId, @Name, @Description, @IsPrivate);
+            (@CreatorId, @Name, @Description, @Img, @IsPrivate);
             SELECT LAST_INSERT_ID();
             ";
             int id = _db.ExecuteScalar<int>(sql, vaultData);
@@ -53,6 +53,7 @@ namespace checkpoint8.Repositories
            UPDATE vaults SET
            name = @Name,
            description = @Description,
+           img = @Img,
            isPrivate = @IsPrivate
            WHERE id = @Id;
            ";
