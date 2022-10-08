@@ -4,7 +4,11 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">{{ vault?.name }}</h4>
 
-        <button class="btn-color rounded" @click="deleteVault">
+        <button
+          v-if="vault?.creatorId == account.id"
+          class="btn-color rounded"
+          @click="deleteVault"
+        >
           Delete Vault
         </button>
       </div>

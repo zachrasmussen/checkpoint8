@@ -19,7 +19,12 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
+          <span
+            v-if="profile?.id == account?.id"
+            class="add"
+            data-bs-toggle="modal"
+            data-bs-target="#vault-form"
+          >
             ⊕
           </span>
         </h4>
@@ -38,7 +43,12 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Keeps
-          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form">
+          <span
+            v-if="profile?.id == account?.id"
+            class="add"
+            data-bs-toggle="modal"
+            data-bs-target="#keep-form"
+          >
             ⊕
           </span>
         </h4>
@@ -111,7 +121,7 @@ export default {
       profile: computed(() => AppState.activeProfile),
       keeps: computed(() => AppState.keeps),
       vaults: computed(() => AppState.vaults),
-      yourProfile: computed(() => AppState.activeKeep?.creatorId == AppState.account?.id)
+
     };
   },
 
