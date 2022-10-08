@@ -8,7 +8,7 @@
       data-bs-toggle="modal"
       data-bs-target="#keep-details"
     />
-    <div class="keep-title-card m-2">
+    <div class="title-card m-2">
       <h3
         class="
           text-white text-start
@@ -16,7 +16,7 @@
           d-flex
           align-items-center
           p-3
-          item-names
+          item-name
           w-100
           text-start
         "
