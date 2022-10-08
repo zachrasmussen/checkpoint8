@@ -67,16 +67,16 @@ namespace checkpoint8.Services
             return $"{original.Name} was delete.";
         }
 
+        internal List<Vault> GetProfileVaults(string id)
+        {
+            List<Vault> vaults = _vaultRepo.GetUserVaults(id);
+            vaults = vaults.FindAll(v => v.isPrivate == false);
+            return vaults;
+        }
+
         internal List<Vault> GetMyVaults(string id)
         {
-
-            return _vaultRepo.GetMyVaults(id);
-
-
-            // vaults = vaults.FindAll(v => v.isPrivate == false || v.CreatorId == id);
-            // return vaults;
-
-
+            return _vaultRepo.GetUserVaults(id);
         }
 
 

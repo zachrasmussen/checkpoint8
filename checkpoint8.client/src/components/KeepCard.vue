@@ -8,15 +8,35 @@
       data-bs-toggle="modal"
       data-bs-target="#keep-details"
     />
-    <div class="justify-content-evenly d-flex title-card">
-      <h3 class="text-white text-start p-2 item-name text-center">
+    <div class="title-card m-2">
+      <h3
+        class="
+          text-white text-start
+          justify-content-between
+          d-flex
+          align-items-center
+          p-3
+          item-name
+          w-100
+          text-start
+        "
+      >
         {{ keep.name }}
+        <router-link
+          v-if="keep"
+          :to="{
+            name: 'Profile',
+            params: { id: keep?.creator.id },
+          }"
+        >
+          <img
+            :src="keep?.creator.picture"
+            class="creator-img rounded-circle"
+            alt=""
+            data-bs-dismiss="modal"
+          />
+        </router-link>
       </h3>
-      <!-- <img
-        :src="keep?.creator.picture"
-        class="creator-img rounded-circle"
-        alt=""
-      /> -->
     </div>
   </div>
   <KeepDetails />
@@ -67,6 +87,12 @@ export default {
   border: 0.5px solid #a3a3a3;
   backdrop-filter: blur(10px);
   font-size: 1em;
+}
+.item-names {
+  position: absolute;
+  bottom: 0;
+  font-size: 1.25em;
+  text-shadow: 1px 1px 1px #000000;
 }
 .creator-img {
   width: 50px;

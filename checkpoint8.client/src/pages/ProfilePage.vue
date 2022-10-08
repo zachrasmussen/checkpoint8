@@ -13,26 +13,21 @@
         </div>
       </div>
     </div>
-    <!--  -->
+
     <!-- SECTION user's vaults -->
     <div class="row">
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span
-            class="add"
-            data-bs-toggle="modal"
-            data-bs-target="#vault-form"
-            v-if="yourProfile"
-          >
+          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
             ⊕
           </span>
         </h4>
       </div>
     </div>
     <div class="row">
-      <div class="masonry mt-3">
-        <div class="" v-for="v in vaults" :key="v.id">
+      <div class="masonry mt-3 p-5">
+        <div class="shadow" v-for="v in vaults" :key="v.id">
           <VaultCard :vault="v" />
         </div>
       </div>
@@ -43,22 +38,15 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Keeps
-          <span
-            class="add"
-            data-bs-toggle="modal"
-            data-bs-target="#keep-form"
-            v-if="yourProfile"
-          >
+          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form">
             ⊕
           </span>
         </h4>
       </div>
     </div>
     <div class="row">
-      <div class="">
-        <div class="masonry mb-5 offset-1" v-for="k in keeps" :key="k.id">
-          <KeepCard :keep="k" />
-        </div>
+      <div class="masonry mb-5 offset-1" v-for="k in keeps" :key="k.id">
+        <KeepCard :keep="k" />
       </div>
     </div>
   </div>

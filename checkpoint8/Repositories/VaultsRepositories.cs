@@ -73,7 +73,7 @@ namespace checkpoint8.Repositories
             _db.Execute(sql, new { id });
         }
 
-        internal List<Vault> GetMyVaults(string id)
+        internal List<Vault> GetUserVaults(string id)
         {
             string sql = @"
             SELECT
@@ -81,7 +81,7 @@ namespace checkpoint8.Repositories
             a.*
             FROM vaults v
             JOIN accounts a ON v.creatorId = a.id
-            WHERE a.id = @id 
+           WHERE v.creatorId =@id
             ";
             return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
             {
@@ -90,21 +90,6 @@ namespace checkpoint8.Repositories
             }, new { id }).ToList();
         }
 
-        internal List<Vault> GetVaultsByProfile(string id)
-        {
-            string sql = @"
-            SELECT
-            v.*,
-            a.*
-            FROM vaults v
-            JOIN accounts a ON v.creatorId = a.id
-            WHERE v.creatorId = @id AND isPrivate = false
-            ";
-            return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
-            {
-                vault.Creator = profile;
-                return vault;
-            }, new { id }).ToList();
-        }
+
     }
 }

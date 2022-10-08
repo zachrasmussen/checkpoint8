@@ -5,13 +5,13 @@
       params: { id: vault.id },
     }"
   >
-    <div class="p-3 vault-title-card">
+    <div class="p-3 vault-title-card bg-primary">
       <img
         class="vault-img img-fluid rounded shadow selectable"
         :src="vault.img"
         alt=""
       />
-      <div class="title-card">
+      <div class="title-card justify-content-center d-flex p-3">
         <h3 class="text-white text-start p-2 item-name text-center">
           {{ vault.name }}
         </h3>
