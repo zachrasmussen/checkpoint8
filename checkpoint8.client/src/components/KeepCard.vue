@@ -8,11 +8,7 @@
       data-bs-toggle="modal"
       data-bs-target="#keep-details"
     />
-<<<<<<< HEAD
     <div class="keep-title-card m-2">
-=======
-    <div class="title-card m-2">
->>>>>>> 062cf110da8182ad059ab1e1a22d169152d7dc2a
       <h3
         class="
           text-white text-start
@@ -20,11 +16,7 @@
           d-flex
           align-items-center
           p-3
-<<<<<<< HEAD
           item-names
-=======
-          item-name
->>>>>>> 062cf110da8182ad059ab1e1a22d169152d7dc2a
           w-100
           text-start
         "
