@@ -31,7 +31,7 @@
                   type="text"
                   class="form-control"
                   name="vault-img"
-                  placeholder="Add URL"
+                  placeholder="Add a description"
                   required
                 />
               </div>

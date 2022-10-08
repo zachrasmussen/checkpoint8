@@ -13,18 +13,13 @@
         </div>
       </div>
     </div>
-    <!--  -->
+
     <!-- SECTION user's vaults -->
     <div class="row">
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Vaults
-          <span
-            class="add"
-            data-bs-toggle="modal"
-            data-bs-target="#vault-form"
-            v-if="yourProfile"
-          >
+          <span class="add" data-bs-toggle="modal" data-bs-target="#vault-form">
             ⊕
           </span>
         </h4>
@@ -43,12 +38,7 @@
       <div class="col-12 d-flex justify-content-between p-3 mt-5">
         <h4 class="offset-1">
           Keeps
-          <span
-            class="add"
-            data-bs-toggle="modal"
-            data-bs-target="#keep-form"
-            v-if="yourProfile"
-          >
+          <span class="add" data-bs-toggle="modal" data-bs-target="#keep-form">
             ⊕
           </span>
         </h4>
